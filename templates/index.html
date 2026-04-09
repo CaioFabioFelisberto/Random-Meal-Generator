@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Meal Generator</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <main class="page">
+        <header class="hero">
+            <p class="eyebrow">Random Meal Generator</p>
+            <h1>Find a delicious meal in seconds</h1>
+            <p class="subtitle">Click the button to generate a new recipe with ingredients, origin, and preparation instructions.</p>
+
+            <form action="{{url_for('index')}}" method="POST" class="generator-form">
+                <button type="submit">Generate Random Meal</button>
+            </form>
+        </header>
+
+        <section class="meal-layout">
+            <article class="meal-card media-card">
+                {% if image_url %}
+                <img src="{{image_url}}" alt="Image of meal {{meal}}" class="meal-image">
+                {% else %}
+                <div class="image-placeholder">Your meal will appear here</div>
+                {% endif %}
+            </article>
+
+            <article class="meal-card info-card">
+                <h2>{{meal or 'Choose a meal to get started'}}</h2>
+
+                <div class="info-grid">
+                    <p><span>Category</span>{{category or '---'}}</p>
+                    <p><span>Origin</span>{{area or '---'}}</p>
+                    <p><span>Tags</span>{{tags or '---'}}</p>
+                </div>
+
+                <div class="block">
+                    <h3>Ingredients</h3>
+                    <p>{{ingredients or 'The ingredients for the recipe will appear here.'}}</p>
+                </div>
+
+                <div class="block">
+                    <h3>Preparation Method</h3>
+                    <p>{{instructions or 'The preparation instructions will appear here.'}}</p>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
